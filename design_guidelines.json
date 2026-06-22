@@ -1,0 +1,140 @@
+{
+  "theme": "Light",
+  "archetype": "Archetype 3 (Pastel & Soft) with Archetype 1 (Organic & Earthy) and Luxury Accents",
+  "brand": {
+    "name": "Pehli Kilkari",
+    "description": "Premium 3D e-commerce website for Baby & Kids Products. Soft, modern, trustworthy, parent-friendly, colourful but elegant.",
+    "vibe": "Luxurious yet approachable, soft, playful, magical, and highly trustworthy."
+  },
+  "typography": {
+    "font_pair": {
+      "heading": "Outfit",
+      "body": "Quicksand"
+    },
+    "reasoning": "Outfit provides a premium, clean geometric look suitable for a high-end luxury brand (like Carter's or high-end Shopify), while Quicksand brings a softness, roundness, and friendliness perfect for baby products. Avoids overused generic fonts.",
+    "scales": {
+      "h1": "text-5xl md:text-6xl lg:text-[4rem] font-medium tracking-tight leading-tight",
+      "h2": "text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight",
+      "h3": "text-xl md:text-2xl font-medium",
+      "body": "text-base md:text-lg leading-relaxed text-[#1C1917]",
+      "small_label": "text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-[#57534E]"
+    }
+  },
+  "colors": {
+    "background": {
+      "base": "#FFF8F0",
+      "glass": "rgba(255, 248, 240, 0.75)"
+    },
+    "brand": {
+      "baby_blue": "#DFF4FF",
+      "pastel_pink": "#FFE6F0",
+      "lavender": "#F2E8FF",
+      "mint_green": "#E8FFF1"
+    },
+    "text": {
+      "primary": "#1C1917",
+      "secondary": "#57534E",
+      "inverse": "#FFFFFF",
+      "accent": "#0F172A"
+    },
+    "ui": {
+      "border": "rgba(28, 25, 23, 0.05)",
+      "card_bg": "#FFFFFF"
+    }
+  },
+  "layout_and_spacing": {
+    "philosophy": "Generous Spacing, Optical Alignment, Airy Layouts, High-End Margins",
+    "container": "mx-auto max-w-[1400px] px-6 md:px-12 lg:px-20",
+    "section_padding": "py-24 md:py-32",
+    "border_radius": {
+      "button": "rounded-full",
+      "card": "rounded-3xl",
+      "image": "rounded-3xl",
+      "badge": "rounded-full"
+    },
+    "grids": {
+      "hero_bento": "grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12",
+      "product_grid": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12"
+    }
+  },
+  "surface_strategies": {
+    "glassmorphism": "bg-white/60 backdrop-blur-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.03)] saturate-150",
+    "cards": "bg-white rounded-3xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-500 border border-transparent hover:border-[#F2E8FF]",
+    "nav_header": "fixed top-0 w-full z-50 bg-[#FFF8F0]/80 backdrop-blur-xl border-b border-[#1C1917]/5"
+  },
+  "components": {
+    "hero": "Split layout or asymmetric bento. Left: Typography (Outfit) & Primary CTA. Right: 3D interactive `<Canvas>` using @react-three/fiber of a premium baby gift box opening. Floating products/particles (using `<Float>` from @react-three/drei).",
+    "buttons": "Primary: bg-[#FFE6F0] text-[#1C1917] rounded-full px-8 py-4 font-bold shadow-sm hover:-translate-y-1 hover:shadow-md transition-all. Secondary: glassmorphism rounded-full px-8 py-4 font-bold border-white/50.",
+    "product_card": "Image wrapper with aspect-[4/5] object-cover overflow-hidden rounded-t-3xl. Hover: image scales 1.05. Content padding p-6. Minimalist, title left-aligned, price right-aligned. Floating 'Quick Add' icon button appears on hover over the image bottom-right corner.",
+    "categories_carousel": "Smooth horizontal scrolling. Circular or highly rounded cards for categories (Baby Caps, Socks, Sleeping Bags) with pastel background fills (#DFF4FF, #FFE6F0, etc.).",
+    "trust_badges": "Minimalist lucide-react icons (Shield, Heart, Truck) inside pastel rounded squares. Neutral text tone (#57534E) to balance the colorful pastels."
+  },
+  "motion_and_interactions": {
+    "scroll": "Smooth scrolling via Lenis for a premium momentum feel.",
+    "hover": "Interactive hover effects: subtle lift (`-translate-y-2`) and scale for products, button shadow expansion.",
+    "3d_elements": "Parallax scrolling on background geometric shapes. Floating animations for heroes and section transitions.",
+    "page_load": "Framer Motion staggered fade-ups for text blocks and product cards (`initial={{opacity:0, y:30}}`)."
+  },
+  "media": {
+    "image_urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1759563876829-47c081a2afd9",
+        "description": "Premium baby gift box on white fabric",
+        "category": "hero_alternate, gifting_section"
+      },
+      {
+        "url": "https://images.pexels.com/photos/11116578/pexels-photo-11116578.jpeg",
+        "description": "Pastel-themed nursery mobile",
+        "category": "hero_background, categories_banner"
+      },
+      {
+        "url": "https://images.pexels.com/photos/7470709/pexels-photo-7470709.jpeg",
+        "description": "Toddler playing with red striped ball",
+        "category": "lifestyle, homepage_banner"
+      },
+      {
+        "url": "https://images.pexels.com/photos/32046405/pexels-photo-32046405.jpeg",
+        "description": "Baby in premium pastel pink clothes",
+        "category": "product, baby_clothes_category"
+      },
+      {
+        "url": "https://images.pexels.com/photos/18112837/pexels-photo-18112837.jpeg",
+        "description": "Baby in lace bonnet",
+        "category": "product, accessories_category"
+      },
+      {
+        "url": "https://images.pexels.com/photos/6692935/pexels-photo-6692935.jpeg",
+        "description": "Child playing with premium wooden toys",
+        "category": "lifestyle, toys_category"
+      },
+      {
+        "url": "https://images.pexels.com/photos/16145651/pexels-photo-16145651.jpeg",
+        "description": "Cozy nursery setting with baby",
+        "category": "about_us, trust_section"
+      },
+      {
+        "url": "https://images.pexels.com/photos/36039/baby-twins-brother-and-sister-one-hundred-days.jpg",
+        "description": "Twins in cute bunny outfits",
+        "category": "lifestyle, customer_reviews"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566958769312-82cef41d19ef?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwxfHxza2luY2FyZSUyMGJhYnklMjBwcm9kdWN0c3xlbnwwfHx8fDE3ODE4NTgwNTd8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Premium baby skincare white bottles",
+        "category": "product, wipes_and_skincare"
+      }
+    ]
+  },
+  "testing": {
+    "required_attributes": "All interactive elements, forms, links, buttons, and key informational elements MUST include `data-testid` attribute (e.g., `data-testid=\"add-to-cart-button\"`)."
+  },
+  "instructions_to_main_agent": [
+    "Install and use @react-three/fiber and @react-three/drei for the 3D Hero section (gift box animation) and floating products.",
+    "Implement @studio-freight/react-lenis for smooth scrolling.",
+    "Use framer-motion for scroll-triggered staggered text entrances and card hovers.",
+    "Apply strict glassmorphism only where content scrolls behind (Nav) or on floating widgets (Cart popup).",
+    "Always tint grays and shadows with the primary background color (#FFF8F0) to avoid muddy visuals.",
+    "Prioritize accessibility: use #1C1917 (Stone 900) for text on pastel backgrounds to ensure readable contrast.",
+    "Map user-specified categories to the UI carousel/bento layouts clearly.",
+    "Do NOT use HTML `<select>` or native date pickers. Use shadcn/ui DropdownMenu/Select elements and customize their borders and radii to match our rounded-3xl/rounded-full scale."
+  ]
+}
