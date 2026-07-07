@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
+import Mascot from "@/components/Mascot";
 import Home from "@/pages/Home";
 import Shop from "@/pages/Shop";
 import ProductDetail from "@/pages/ProductDetail";
@@ -62,6 +63,7 @@ function App() {
           <Router />
           <Footer />
           <ChatBot />
+          <Mascot />
           <Toaster position="top-center" richColors />
         </BrowserRouter>
       </AppProvider>
