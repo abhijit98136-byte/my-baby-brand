@@ -4,6 +4,7 @@ import { api, INR } from "../lib/api";
 import { useApp } from "../lib/store";
 import { Heart, ShoppingBag, Shield, Truck, Undo2, Star, Minus, Plus } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import SEO from "../components/SEO";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -27,6 +28,28 @@ export default function ProductDetail() {
 
   return (
     <div className="pt-28 pb-20" data-testid="product-detail-page">
+      <SEO
+        title={`${product.name} — Pehli Kilkari`}
+        description={product.description.slice(0, 155)}
+        canonical={`https://pehlikilkari.com/product/${product.slug}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          image: product.images,
+          description: product.description,
+          sku: product.id,
+          brand: { "@type": "Brand", name: "Pehli Kilkari" },
+          aggregateRating: { "@type": "AggregateRating", ratingValue: product.rating, reviewCount: product.reviews_count || 1 },
+          offers: {
+            "@type": "Offer",
+            priceCurrency: "INR",
+            price: product.price,
+            availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            url: `https://pehlikilkari.com/product/${product.slug}`,
+          },
+        }}
+      />
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
         <nav className="text-sm text-inkmuted mb-6"><Link to="/">Home</Link> / <Link to="/shop">Shop</Link> / <span className="text-ink">{product.name}</span></nav>
         <div className="grid lg:grid-cols-2 gap-12">

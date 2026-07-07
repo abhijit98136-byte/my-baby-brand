@@ -39,7 +39,7 @@ export default function Admin() {
         <h1 className="font-heading text-4xl font-medium">Admin Dashboard</h1>
         <div className="grid lg:grid-cols-5 gap-6 mt-8">
           <aside className="glass-card rounded-3xl p-3 h-fit space-y-1">
-            {[['dashboard','Dashboard',LayoutDashboard],['products','Products',Package],['orders','Orders',ShoppingBag],['users','Customers',Users],['coupons','Coupons',Tag]].map(([k,l,Ic])=>(
+            {[['dashboard','Dashboard',LayoutDashboard],['products','Products',Package],['bulk','Bulk Import',Package],['orders','Orders',ShoppingBag],['users','Customers',Users],['coupons','Coupons',Tag]].map(([k,l,Ic])=>(
               <button key={k} onClick={()=>setTab(k)} className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left font-medium text-sm ${tab===k?'bg-ink text-cream':'hover:bg-white/70'}`} data-testid={`admin-tab-${k}`}><Ic className="w-4 h-4" /> {l}</button>
             ))}
           </aside>
@@ -69,6 +69,7 @@ export default function Admin() {
                   <tbody>{products.map(p=>(<tr key={p.id} className="border-t border-ink/5"><td className="py-2 font-medium flex items-center gap-2"><img src={p.images[0]} className="w-8 h-8 rounded-lg object-cover" alt="" />{p.name}</td><td>{p.category}</td><td>{INR(p.price)}</td><td>{p.stock}</td></tr>))}</tbody></table></div>
               </div>
             )}
+            {tab === "bulk" && <BulkImportPanel onDone={load} />}
             {tab === "orders" && (
               <div className="glass-card rounded-3xl p-6">
                 <h3 className="font-heading text-xl font-semibold mb-4">All Orders ({orders.length})</h3>
@@ -90,6 +91,32 @@ export default function Admin() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function BulkImportPanel({ onDone }) {
+  const [csv, setCsv] = useState("name,slug,description,price,mrp,category,collection,images,stock,featured\nOrganic Baby Onesie,organic-baby-onesie,Soft cotton onesie for newborns,499,799,baby-clothing,newborn-essentials,https://images.pexels.com/photos/32046405/pexels-photo-32046405.jpeg,40,true");
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const submit = async () => {
+    setLoading(true);
+    try { const { data } = await api.post("/admin/products/bulk", { csv }); setResult(data); toast.success(`Added ${data.added} products`); onDone(); }
+    catch (e) { toast.error(e.response?.data?.detail || "Import failed"); }
+    finally { setLoading(false); }
+  };
+  return (
+    <div className="glass-card rounded-3xl p-6" data-testid="bulk-import-panel">
+      <h3 className="font-heading text-xl font-semibold mb-2">Bulk Product Import (CSV)</h3>
+      <p className="text-sm text-inkmuted mb-4">Columns: <code>name, slug, description, price, mrp, category, collection, images, stock, featured</code>. Use <code>;</code> to separate multiple image URLs. Rows with existing slugs are updated.</p>
+      <textarea rows={12} value={csv} onChange={e=>setCsv(e.target.value)} className="w-full p-4 rounded-2xl bg-white border border-ink/10 font-mono text-xs" data-testid="bulk-csv-input" />
+      <button onClick={submit} disabled={loading} className="btn-pill btn-primary mt-3" data-testid="bulk-submit-btn">{loading ? "Importing..." : "Import Products"}</button>
+      {result && (
+        <div className="mt-4 p-4 bg-mintgreen rounded-2xl text-sm" data-testid="bulk-result">
+          <p className="font-semibold">✓ Added / Updated: {result.added}</p>
+          {result.errors?.length > 0 && <div className="mt-2"><p className="font-semibold text-red-700">Errors:</p><ul className="list-disc ml-5">{result.errors.map((e,i)=><li key={i}>{e}</li>)}</ul></div>}
+        </div>
+      )}
     </div>
   );
 }

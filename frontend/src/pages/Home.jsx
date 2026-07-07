@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api";
 import Hero from "../components/Hero";
+import SEO from "../components/SEO";
 import TrustBadges from "../components/TrustBadges";
 import CategoryCarousel from "../components/CategoryCarousel";
 import ProductCard from "../components/ProductCard";
@@ -21,6 +22,11 @@ export default function Home() {
 
   return (
     <div data-testid="home-page">
+      <SEO
+        title="Pehli Kilkari — Premium Baby & Kids Essentials | Every Smile Begins Here"
+        description="Shop premium baby gift sets, caps, socks, shoes, sleeping bags, painting kits, lunchboxes & more. OEKO-TEX certified, hypoallergenic, fast pan-India delivery."
+        canonical="https://pehlikilkari.com/"
+      />
       <Hero />
       <CategoryCarousel categories={categories} />
 

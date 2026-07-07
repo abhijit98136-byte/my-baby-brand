@@ -516,6 +516,81 @@ async def contact(payload: dict):
 async def root():
     return {"message": "Pehli Kilkari API", "version": "1.0"}
 
+# ===== SEO =====
+from fastapi.responses import Response as FastResponse
+
+@api_router.get("/sitemap.xml")
+async def sitemap():
+    base = os.environ.get("SITE_URL", "https://pehlikilkari.com")
+    products = await db.products.find({}, {"_id": 0, "slug": 1, "created_at": 1}).to_list(1000)
+    categories = await db.categories.find({}, {"_id": 0, "slug": 1}).to_list(100)
+    collections = await db.collections.find({}, {"_id": 0, "slug": 1}).to_list(100)
+    static_urls = ["/", "/shop", "/about", "/contact", "/faq", "/privacy", "/return-policy", "/terms", "/track"]
+    urls = []
+    for u in static_urls:
+        urls.append(f"<url><loc>{base}{u}</loc><changefreq>weekly</changefreq><priority>{'1.0' if u=='/' else '0.7'}</priority></url>")
+    for c in categories:
+        urls.append(f"<url><loc>{base}/shop?category={c['slug']}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>")
+    for c in collections:
+        urls.append(f"<url><loc>{base}/shop?collection={c['slug']}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>")
+    for p in products:
+        lm = p.get("created_at", "")[:10]
+        urls.append(f"<url><loc>{base}/product/{p['slug']}</loc><lastmod>{lm}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>")
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>"
+    return FastResponse(content=xml, media_type="application/xml")
+
+@api_router.get("/robots.txt")
+async def robots_txt():
+    base = os.environ.get("SITE_URL", "https://pehlikilkari.com")
+    txt = f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /auth\nDisallow: /checkout\nDisallow: /account\nDisallow: /cart\nSitemap: {base}/api/sitemap.xml\n"
+    return FastResponse(content=txt, media_type="text/plain")
+
+# ===== Admin Bulk Import =====
+class BulkProductsIn(BaseModel):
+    csv: str  # CSV text: name,slug,description,price,mrp,category,collection,images,stock,featured
+
+@api_router.post("/admin/products/bulk")
+async def bulk_import(data: BulkProductsIn, admin=Depends(require_admin)):
+    lines = [l for l in data.csv.strip().split("\n") if l.strip()]
+    if not lines:
+        raise HTTPException(400, "Empty CSV")
+    header = [h.strip().lower() for h in lines[0].split(",")]
+    required = {"name", "price", "mrp", "category", "images"}
+    if not required.issubset(set(header)):
+        raise HTTPException(400, f"CSV must include columns: {sorted(required)}")
+    added = 0; errors = []
+    for i, line in enumerate(lines[1:], start=2):
+        # naive CSV split (no quotes) - users use semicolons in image lists
+        parts = [p.strip() for p in line.split(",")]
+        if len(parts) < len(header):
+            errors.append(f"Line {i}: too few columns"); continue
+        row = dict(zip(header, parts[:len(header)]))
+        try:
+            slug = row.get("slug") or row["name"].lower().replace(" ", "-")
+            imgs = [x.strip() for x in row["images"].split(";") if x.strip()]
+            p = {
+                "id": str(uuid.uuid4()),
+                "name": row["name"],
+                "slug": slug,
+                "description": row.get("description", row["name"]),
+                "price": float(row["price"]),
+                "mrp": float(row["mrp"]),
+                "category": row["category"],
+                "collection": row.get("collection") or None,
+                "images": imgs,
+                "stock": int(row.get("stock", 50)),
+                "rating": 4.7,
+                "reviews_count": 0,
+                "tags": [],
+                "featured": row.get("featured", "").lower() in ("true", "yes", "1"),
+                "created_at": now_iso(),
+            }
+            await db.products.update_one({"slug": slug}, {"$set": p}, upsert=True)
+            added += 1
+        except Exception as e:
+            errors.append(f"Line {i}: {e}")
+    return {"added": added, "errors": errors}
+
 # ===== Seed =====
 SEED_CATEGORIES = [
     {"slug": "baby-gift-sets", "name": "Baby Gift Sets", "color": "#FFE6F0", "icon": "Gift"},
