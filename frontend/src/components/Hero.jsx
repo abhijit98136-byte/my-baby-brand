@@ -16,7 +16,7 @@ export default function Hero() {
             <Sparkles className="w-4 h-4 text-pastelpink" />
             <span className="text-ink">India's most loved baby brand</span>
           </div>
-          <h1 className="font-heading font-medium text-[2.6rem] md:text-6xl lg:text-[4.4rem] leading-[1.05] tracking-tight text-ink">
+          <h1 className="font-heading font-medium text-[clamp(1.9rem,7vw,4.4rem)] leading-[1.1] tracking-tight text-ink">
             Every smile begins with
             <br />
             <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#ff8fbf] via-[#b88ee0] to-[#7ab9e8]">Pehli Kilkari</span>
@@ -24,7 +24,7 @@ export default function Hero() {
           <p className="mt-6 text-lg md:text-xl text-inkmuted max-w-xl leading-relaxed">
             <span className="font-heading italic text-[#5A2CA0] font-medium">Nanhe Kadmon Ke Bade Sapne</span> — Premium baby & kids essentials for your little one. Lovingly curated, baby-safe certified, and shipped across India.
           </p>
-          <div className="mt-9 flex flex-wrap gap-4">
+          <div className="mt-7 sm:mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link to="/shop" className="btn-pill btn-primary" data-testid="hero-shop-now">
               Shop Now <ArrowRight className="w-4 h-4" />
             </Link>
