@@ -13,9 +13,12 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 glass" data-testid="navbar">
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 flex items-center justify-between py-4">
-        <Link to="/" className="flex items-center gap-2" data-testid="logo-link">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pastelpink to-lavender flex items-center justify-center font-heading font-bold text-ink shadow-sm">P</div>
-          <span className="font-heading font-semibold text-lg md:text-xl text-ink">Pehli Kilkari</span>
+        <Link to="/" className="flex items-center gap-2.5" data-testid="logo-link">
+          <img src="https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/ayqqjhp1_Pehli-Kilkari-Main-Logo.jpg" alt="Pehli Kilkari" className="w-11 h-11 rounded-full object-cover shadow-sm bg-white" />
+          <div className="hidden sm:flex flex-col leading-tight">
+            <span className="font-heading font-bold text-lg text-[#5A2CA0]">Pehli Kilkari</span>
+            <span className="text-[10px] text-inkmuted -mt-0.5">Nanhe Kadmon Ke Bade Sapne</span>
+          </div>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 font-medium text-sm text-ink">

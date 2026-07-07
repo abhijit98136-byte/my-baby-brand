@@ -18,9 +18,12 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-10 relative">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center font-heading font-bold">P</div>
-              <span className="font-heading font-semibold text-xl">Pehli Kilkari</span>
+            <div className="flex items-center gap-3 mb-4">
+              <img src="https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/ayqqjhp1_Pehli-Kilkari-Main-Logo.jpg" alt="Pehli Kilkari" className="w-12 h-12 rounded-full object-cover bg-white shadow-sm" />
+              <div className="leading-tight">
+                <div className="font-heading font-bold text-lg text-[#5A2CA0]">Pehli Kilkari</div>
+                <div className="text-[10px] text-inkmuted">Nanhe Kadmon Ke Bade Sapne</div>
+              </div>
             </div>
             <p className="text-sm text-inkmuted leading-relaxed">Every smile begins with Pehli Kilkari. Premium baby & kids essentials, lovingly curated for India's little ones.</p>
             <div className="flex gap-2 mt-5">

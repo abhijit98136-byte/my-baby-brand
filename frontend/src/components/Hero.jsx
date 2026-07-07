@@ -22,7 +22,7 @@ export default function Hero() {
             <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#ff8fbf] via-[#b88ee0] to-[#7ab9e8]">Pehli Kilkari</span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-inkmuted max-w-xl leading-relaxed">
-            Premium baby & kids essentials for your little one. Lovingly curated, baby-safe certified, and shipped across India.
+            <span className="font-heading italic text-[#5A2CA0] font-medium">Nanhe Kadmon Ke Bade Sapne</span> — Premium baby & kids essentials for your little one. Lovingly curated, baby-safe certified, and shipped across India.
           </p>
           <div className="mt-9 flex flex-wrap gap-4">
             <Link to="/shop" className="btn-pill btn-primary" data-testid="hero-shop-now">
