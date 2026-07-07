@@ -35,17 +35,42 @@ export default function CursorFollower() {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      aria-hidden="true"
-      data-testid="cursor-follower"
-      style={{
-        position: "fixed", top: 0, left: 0, width: 96, height: 96,
-        pointerEvents: "none", zIndex: 9999,
-        willChange: "transform",
-        filter: "drop-shadow(0 8px 14px rgba(90,44,160,0.22))",
-      }}
-    >
+    <>
+      {/* Desktop: cursor follower */}
+      <div
+        ref={ref}
+        aria-hidden="true"
+        data-testid="cursor-follower"
+        className="hidden md:block"
+        style={{
+          position: "fixed", top: 0, left: 0, width: 96, height: 96,
+          pointerEvents: "none", zIndex: 9999,
+          willChange: "transform",
+          filter: "drop-shadow(0 8px 14px rgba(90,44,160,0.22))",
+        }}
+      >
+        {svgCluster}
+      </div>
+      {/* Mobile/touch: fixed floating baby bottom-right with bob animation */}
+      <div
+        aria-hidden="true"
+        data-testid="mobile-floater"
+        className="md:hidden"
+        style={{
+          position: "fixed", right: 12, bottom: 96, width: 72, height: 72,
+          pointerEvents: "none", zIndex: 39,
+          animation: "mfloat 3.5s ease-in-out infinite",
+          filter: "drop-shadow(0 8px 14px rgba(90,44,160,0.22))",
+        }}
+      >
+        {svgCluster}
+        <style>{`@keyframes mfloat { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(3deg); } }`}</style>
+      </div>
+    </>
+  );
+}
+
+const svgCluster = (
       <svg viewBox="0 0 96 96" width="96" height="96" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="cf-face" cx="50%" cy="45%" r="55%">
@@ -106,6 +131,4 @@ export default function CursorFollower() {
           <path d="M13 3 L13 6" stroke="#FFB6D6" strokeWidth="1.4" />
         </g>
       </svg>
-    </div>
-  );
-}
+);

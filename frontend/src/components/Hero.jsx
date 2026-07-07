@@ -41,7 +41,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, delay: 0.2 }} className="lg:col-span-5 relative h-[480px] lg:h-[560px] scene">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, delay: 0.2 }} className="lg:col-span-5 relative h-[380px] sm:h-[480px] lg:h-[560px] scene hidden sm:block">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="giftbox">
               <div className="giftbox-face"></div>
