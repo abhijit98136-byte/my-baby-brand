@@ -1,0 +1,33 @@
+{
+  "summary": "First-finish smoke test of Pehli Kilkari MVP (backend + frontend). All 13 core scoped checks pass. Backend catalog, auth (JWT/OTP/admin), coupons, address CRUD, order create+track, admin stats, newsletter, and Google session endpoint (graceful 401) verified. Frontend home/auth/shop render with no console errors; Google Sign-in button present; 29 product cards on shop page.",
+  "tested_scope": ["backend", "frontend", "auth", "integration"],
+  "passed": [
+    "GET /api/products -> 29 products",
+    "GET /api/categories -> 16",
+    "GET /api/collections -> 5",
+    "POST /api/auth/signup returns JWT token + user",
+    "POST /api/auth/login admin@pehlikilkari.com/Admin@123 -> role=admin with token (field name is 'token', not 'access_token')",
+    "POST /api/auth/otp/request returns demo_otp; /verify returns JWT",
+    "POST /api/coupons/validate WELCOME10 subtotal 600 -> 10% (discount 60.0)",
+    "POST /api/addresses with full_name works; list returns saved address",
+    "POST /api/orders (COD) -> order_number PK79956293, subtotal 3598, gst 179.9, shipping 0 (>=999), total 3777.9",
+    "GET /api/orders/track/{order_number} returns tracking stages and full order details",
+    "GET /api/admin/stats -> products_count 29, users_count 3, orders_count present",
+    "POST /api/newsletter -> {ok:true}",
+    "POST /api/auth/google/session with fake X-Session-ID -> HTTP 401 with graceful error (endpoint wired)",
+    "Frontend Home renders hero 'Every smile begins with Pehli Kilkari', stats, WhatsApp float button",
+    "Frontend /auth shows Login tab and data-testid=google-signin-btn Google button",
+    "Frontend /shop renders 29 product cards; no console errors"
+  ],
+  "failed": [],
+  "action_items": [
+    "MINOR: Login/signup response uses key 'token' not 'access_token' as described in review request — verify frontend client reads 'token' (it does, no bug, just note for docs)."
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "retest_needed": false,
+  "full_testing_deferred": true,
+  "notes": {
+    "mocked": ["Razorpay payment", "SMS OTP via demo_otp"],
+    "google_auth": "End-to-end Google OAuth flow not testable without real Emergent session_id; endpoint reachable and errors gracefully as expected."
+  }
+}
