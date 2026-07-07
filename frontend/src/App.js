@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
 import Mascot from "@/components/Mascot";
 import CursorFollower from "@/components/CursorFollower";
-import ScrollWalker from "@/components/ScrollWalker";
 import Home from "@/pages/Home";
 import Shop from "@/pages/Shop";
 import ProductDetail from "@/pages/ProductDetail";
@@ -66,7 +65,6 @@ function App() {
           <Footer />
           <ChatBot />
           <Mascot />
-          <ScrollWalker />
           <CursorFollower />
           <Toaster position="top-center" richColors />
         </BrowserRouter>
