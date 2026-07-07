@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const SHEET = "https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/o6veuyg4_Untitled%20design%20%281%29.png";
+const SHEET = "https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/l7vfhihs_Gemini_Generated_Image_ucw38sucw38sucw3.webp";
 
 /**
  * Scroll-triggered walker mascot (bottom-right corner).
@@ -39,8 +39,8 @@ export default function ScrollWalker() {
     return () => { window.removeEventListener("scroll", onScroll); clearTimeout(idleTimer.current); };
   }, []);
 
-  // Sprite positions: pose 1 (stand) ≈ 10%, pose 3 (jump/leap) ≈ 52%
-  const bgPos = pose === "leap" ? "52% 50%" : "10% 50%";
+  // Sprite positions (4 poses): pose 1 (sit) ≈ 12%, pose 3 (crawl/climb) ≈ 62%
+  const bgPos = pose === "leap" ? "62% 50%" : "12% 50%";
 
   return (
     <div
@@ -62,7 +62,7 @@ export default function ScrollWalker() {
         style={{
           width: 72, height: 72,
           backgroundImage: `url(${SHEET})`,
-          backgroundSize: "500% 100%",
+          backgroundSize: "400% 100%",
           backgroundPosition: bgPos,
           backgroundRepeat: "no-repeat",
           filter: "drop-shadow(0 8px 14px rgba(122,47,160,0.28))",

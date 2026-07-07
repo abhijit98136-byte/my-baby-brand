@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
-const SHEET = "https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/o6veuyg4_Untitled%20design%20%281%29.png";
+const SHEET = "https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/l7vfhihs_Gemini_Generated_Image_ucw38sucw38sucw3.webp";
 
 /**
  * Cursor-follower mascot.
- * - Uses waving pose from sprite sheet (approx 74% X position, sheet has 5 poses side-by-side).
+ * - Uses waving pose (rightmost, ~87% X) from 4-pose sprite sheet.
  * - Smooth lerp toward cursor with easing (feels like ease-in-out).
  * - Tilts based on horizontal velocity (fast right => 15°, fast left => -15°).
  * - pointer-events: none so clicks pass through.
@@ -59,8 +59,8 @@ export default function CursorFollower() {
         style={{
           width: 64, height: 64,
           backgroundImage: `url(${SHEET})`,
-          backgroundSize: "500% 100%",   // 5 poses side-by-side
-          backgroundPosition: "74% 50%", // waving pose
+          backgroundSize: "400% 100%",   // 4 poses side-by-side
+          backgroundPosition: "87% 50%", // rightmost waving pose
           backgroundRepeat: "no-repeat",
           filter: "drop-shadow(0 6px 10px rgba(90,44,160,0.25))",
         }}
