@@ -18,14 +18,19 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-20 pb-10 relative">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <img src="https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/ayqqjhp1_Pehli-Kilkari-Main-Logo.jpg" alt="Pehli Kilkari" className="w-12 h-12 rounded-full object-cover bg-white shadow-sm" />
-              <div className="leading-tight">
-                <div className="font-heading font-bold text-lg text-[#5A2CA0]">Pehli Kilkari</div>
-                <div className="text-[10px] text-inkmuted">Nanhe Kadmon Ke Bade Sapne</div>
+            <div className="mb-4">
+              <div className="flex items-center gap-3">
+                <img src="https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/ayqqjhp1_Pehli-Kilkari-Main-Logo.jpg" alt="Pehli Kilkari" className="w-12 h-12 rounded-full object-cover bg-white shadow-sm" />
+                <span className="font-heading font-bold text-xl text-[#5A2CA0] leading-none">Pehli Kilkari</span>
               </div>
+              <div className="text-[10px] tracking-wide text-inkmuted mt-1.5 pl-[60px]">Nanhe Kadmon Ke Bade Sapne</div>
             </div>
             <p className="text-sm text-inkmuted leading-relaxed">Every smile begins with Pehli Kilkari. Premium baby & kids essentials, lovingly curated for India's little ones.</p>
+            <div className="mt-4 text-xs text-inkmuted space-y-1" data-testid="footer-contact">
+              <p>📞 <a href="tel:+917990051710" className="hover:text-ink">+91 79900 51710</a></p>
+              <p>✉ <a href="mailto:pehlikilkari@gmail.com" className="hover:text-ink">pehlikilkari@gmail.com</a></p>
+              <p>📍 Ahmedabad, India</p>
+            </div>
             <div className="flex gap-2 mt-5">
               <a href="https://instagram.com" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/70 backdrop-blur flex items-center justify-center hover:scale-110 transition" data-testid="social-instagram"><Instagram className="w-4 h-4" /></a>
               <a href="https://facebook.com" aria-label="Facebook" className="w-10 h-10 rounded-full bg-white/70 backdrop-blur flex items-center justify-center hover:scale-110 transition" data-testid="social-facebook"><Facebook className="w-4 h-4" /></a>
@@ -67,7 +72,7 @@ export default function Footer() {
           <p>Made with 💕 for little ones across India.</p>
         </div>
       </div>
-      <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:scale-110 transition" data-testid="whatsapp-button">
+      <a href="https://wa.me/917990051710" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:scale-110 transition" data-testid="whatsapp-button">
         <MessageCircle className="w-6 h-6" />
       </a>
     </footer>

@@ -512,6 +512,38 @@ async def contact(payload: dict):
     await db.contact_messages.insert_one(payload)
     return {"ok": True}
 
+# ===== Chat (AI Support) =====
+from emergentintegrations.llm.chat import LlmChat, UserMessage
+
+CHATBOT_SYSTEM = (
+    "You are Kilkari, the friendly AI shopping assistant for Pehli Kilkari — a premium Indian baby & kids brand from Ahmedabad. "
+    "Tagline: 'Nanhe Kadmon Ke Bade Sapne'. Contact: +91 79900 51710, pehlikilkari@gmail.com. "
+    "You help parents pick baby gifts, gift sets, caps, socks, shoes, sleeping bags, wipes, painting kits, lunchboxes, and school essentials. "
+    "Categories include Baby Gift Sets, Baby Caps, Baby Socks, Baby Shoes, Baby Towels, Baby Sleeping Bags, Baby Wipes, Water Bottles, Painting Kits, Piggy Banks, Colour Sets, Table Tennis, Stationary, Lunchbox. "
+    "Coupons: WELCOME10 (10% off ₹499+), FIRSTKILKARI (15% off ₹999+), BABY20 (20% off ₹1499+). "
+    "Shipping is FREE above ₹999. Delivery in 2-5 business days pan-India. 7-day easy returns. "
+    "All products are OEKO-TEX certified and baby-safe. "
+    "Reply warmly, briefly (max 3 sentences), in English (add a touch of Hindi warmth if the user does). Never invent SKUs or discounts."
+)
+
+class ChatIn(BaseModel):
+    message: str
+    session_id: Optional[str] = None
+
+@api_router.post("/chat")
+async def chat(payload: ChatIn):
+    key = os.environ.get("EMERGENT_LLM_KEY")
+    if not key:
+        raise HTTPException(500, "LLM key not configured")
+    sid = payload.session_id or str(uuid.uuid4())
+    chat_obj = LlmChat(api_key=key, session_id=sid, system_message=CHATBOT_SYSTEM).with_model("anthropic", "claude-sonnet-4-6")
+    try:
+        reply = await chat_obj.send_message(UserMessage(text=payload.message))
+    except Exception as e:
+        raise HTTPException(500, f"Chat error: {str(e)[:200]}")
+    await db.chat_logs.insert_one({"session_id": sid, "user": payload.message, "assistant": reply, "at": now_iso()})
+    return {"reply": reply, "session_id": sid}
+
 @api_router.get("/")
 async def root():
     return {"message": "Pehli Kilkari API", "version": "1.0"}

@@ -13,12 +13,12 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 glass" data-testid="navbar">
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 flex items-center justify-between py-4">
-        <Link to="/" className="flex items-center gap-2.5" data-testid="logo-link">
-          <img src="https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/ayqqjhp1_Pehli-Kilkari-Main-Logo.jpg" alt="Pehli Kilkari" className="w-11 h-11 rounded-full object-cover shadow-sm bg-white" />
-          <div className="hidden sm:flex flex-col leading-tight">
-            <span className="font-heading font-bold text-lg text-[#5A2CA0]">Pehli Kilkari</span>
-            <span className="text-[10px] text-inkmuted -mt-0.5">Nanhe Kadmon Ke Bade Sapne</span>
+        <Link to="/" className="flex flex-col items-start gap-0.5" data-testid="logo-link">
+          <div className="flex items-center gap-2.5">
+            <img src="https://customer-assets.emergentagent.com/job_kidz-essentials-3d/artifacts/ayqqjhp1_Pehli-Kilkari-Main-Logo.jpg" alt="Pehli Kilkari" className="w-11 h-11 rounded-full object-cover shadow-sm bg-white" />
+            <span className="font-heading font-bold text-xl md:text-2xl tracking-tight text-[#5A2CA0] leading-none">Pehli Kilkari</span>
           </div>
+          <span className="hidden sm:block text-[10px] tracking-wide text-inkmuted mt-1 pl-[54px]">Nanhe Kadmon Ke Bade Sapne</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 font-medium text-sm text-ink">

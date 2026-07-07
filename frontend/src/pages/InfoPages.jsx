@@ -37,7 +37,7 @@ export function Contact() {
             <button className="btn-pill btn-primary w-full justify-center" data-testid="contact-submit">Send Message</button>
           </form>
           <div className="space-y-3">
-            {[[Mail,'care@pehlikilkari.com'],[Phone,'+91 99999 99999'],[MessageCircle,'WhatsApp us anytime'],[MapPin,'Mumbai, India']].map(([Ic,t],i)=>(
+            {[[Mail,'pehlikilkari@gmail.com'],[Phone,'+91 79900 51710'],[MessageCircle,'WhatsApp us anytime'],[MapPin,'Ahmedabad, India']].map(([Ic,t],i)=>(
               <div key={i} className="glass-card rounded-3xl p-5 flex items-center gap-4"><div className="w-11 h-11 rounded-full bg-pastelpink flex items-center justify-center"><Ic className="w-5 h-5" /></div><p className="font-medium">{t}</p></div>
             ))}
           </div>
